@@ -8,21 +8,21 @@ export default function getPropSortOrder(obj, arrSort) {
   // перебираем свойства obj и добавляем отсутствующие в arrSort свойства в массив objProps
   let objProps = [];
 
-  for (const prop in obj) {
-    if (!arrSort.includes(prop)) {
-      objProps.push(prop);
+  Object.keys(obj).forEach((key) => {
+    if (!arrSort.includes(key)) {
+      objProps.push(key);
     }
-  }
+  });
 
   // объединяем массивы arrSort и objProps, последний сортируем в алфавитном порядке
   objProps = [...arrSort, ...objProps.sort((a, b) => a.localeCompare(b))];
 
-  // возвращаем всем свойствам objProps их значения
+  // возвращаем свойствам objProps их значения
   return objProps.map((key) => ({ key, value: obj[key] }));
 }
 
-// const obj = {
-//   name: 'мечник', health: 10, level: 2, attack: 80, defence: 40,
-// };
+const obj = {
+  name: 'мечник', health: 10, level: 2, attack: 80, defence: 40,
+};
 
-// console.log(getPropSortOrder(obj, ['name', 'level']));
+console.log(getPropSortOrder(obj, ['name', 'level']));
